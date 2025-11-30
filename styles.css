@@ -138,28 +138,45 @@ a:hover {
 }
 
 /* ===================================================
-   HERO SEKCJA
+   HERO SEKCJA Z KARUZELĄ
    =================================================== */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   color: white;
   padding: 60px 0;
   overflow: hidden;
+  min-height: 400px;
 }
 
-.hero::before {
-  content: '';
+.hero-bg-slider {
   position: absolute;
   inset: 0;
-  background: url('/sur-met-bud/images/hero/hero-plac.jpg') center/cover;
-  opacity: 0.2;
   z-index: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* Ciemna nakładka dla lepszej czytelności tekstu */
+  z-index: 1;
 }
 
 .hero .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero h3 {
@@ -172,7 +189,6 @@ a:hover {
   font-size: clamp(0.95rem, 2vw, 1.2rem);
   max-width: 700px;
   margin-bottom: 24px;
-  opacity: 0.95;
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -235,7 +251,7 @@ a:hover {
 }
 
 /* ===================================================
-   USŁUGI
+   USŁUGI Z IKONKAMI
    =================================================== */
 .services-list {
   list-style: none;
@@ -254,12 +270,26 @@ a:hover {
   font-size: 1.05rem;
   font-weight: 600;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .services-list li:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--accent);
+}
+
+.service-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.service-text {
+  flex: 1;
+  line-height: 1.5;
 }
 
 /* ===================================================
@@ -502,7 +532,7 @@ a:hover {
 }
 
 /* ===================================================
-   KONTAKT
+   KONTAKT Z IKONKAMI
    =================================================== */
 .contact-section {
   background: white;
@@ -524,6 +554,11 @@ a:hover {
   border-radius: var(--radius);
   margin: 0;
   font-size: 1.05rem;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
 }
 
 .contact-info strong {
